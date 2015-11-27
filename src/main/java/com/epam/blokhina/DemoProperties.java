@@ -3,6 +3,8 @@ package com.epam.blokhina;
 import com.epam.blokhina.apacheProperties.ApachePropertiesReader;
 import com.epam.blokhina.groovyProperties.GroovyPropertiesReader;
 import com.epam.blokhina.javaProperties.JavaPropertiesReader;
+import com.epam.blokhina.nProperties.AbstractEntityReader;
+import com.epam.blokhina.nProperties.NPropsFactory;
 import com.epam.blokhina.yandexProperties.PropsFactory;
 import com.epam.blokhina.yandexProperties.YandexInterfaceProp;
 import org.apache.log4j.Logger;
@@ -36,6 +38,12 @@ public class DemoProperties {
         demoYandexProperties();
         after = System.currentTimeMillis();
         logger.info("Current operation takes " + (after - before) + " mls");
+
+        //demo yandex reader properties
+        before = System.currentTimeMillis();
+        demoNProperty();
+        after = System.currentTimeMillis();
+        logger.info("Current operation takes " + (after - before) + " mls");
     }
 
     private static void demoJavaProperties() {
@@ -63,6 +71,13 @@ public class DemoProperties {
         YandexInterfaceProp first = PropsFactory.getProperties("first");
         logger.info(first.getLogin());
         logger.info(first.getPassword());
+        logger.info(first.getCategories());
+    }
+
+    private static void demoNProperty() {
+        AbstractEntityReader first = NPropsFactory.getProperties("first", Paths.PROPERTIES_PATH);
+        logger.info(first.getLogin());
+        logger.info(first.getPsw());
         logger.info(first.getCategories());
     }
 }
